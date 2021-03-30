@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "devServer": "nodemon server.js",
-    "devCloud": "nodemon cloud_server.js",
-    "start": "node cloud_server.js"
+    "devSignal": "nodemon signalling.js",
+    "start": "node signalling.js"
   },
   "keywords": [],
   "author": "",

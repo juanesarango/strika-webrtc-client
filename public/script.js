@@ -12,9 +12,10 @@ peerjs --port 9000 --key peerjs --path /myapp
 
 const socket = io('/')
 const myPeer = new Peer(undefined, {
-  host: 'vast-sands-06033.herokuapp.com/',
+  host: 'vast-sands-06033.herokuapp.com',
   port: 443,
   secure: true,
+  path: '/',
 })
 
 // const myPeer = new Peer(undefined, {
