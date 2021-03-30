@@ -6,7 +6,7 @@
   "scripts": {
     "devServer": "nodemon server.js",
     "devCloud": "nodemon cloud_server.js",
-    "start": "node server.js"
+    "start": "node cloud_server.js"
   },
   "keywords": [],
   "author": "",
