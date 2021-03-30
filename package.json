@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon server.js",
-    "start": "node cloud_server.js"
+    "devServer": "nodemon server.js",
+    "devCloud": "nodemon cloud_server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",

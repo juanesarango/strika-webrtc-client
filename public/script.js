@@ -11,13 +11,19 @@ peerjs --port 9000 --key peerjs --path /myapp
 // Setup PeerJs connection
 
 const socket = io('/')
+// const myPeer = new Peer(undefined, {
+//   host: 'vast-sands-06033.herokuapp.com/',
+//   port: 4196,
+//   secure: true,
+// })
+
 const myPeer = new Peer(undefined, {
-  host: 'vast-sands-06033.herokuapp.com/',
-  port: 443,
-  secure: true,
+  host: '/',
+  port: 9000,
 })
 
 // Setup video grid
+
 const videoGrid = document.getElementById('video-grid')
 const myVideo = document.createElement('video')
 myVideo.muted = true
@@ -55,6 +61,8 @@ myPeer.on('open', (id) => {
   socket.emit('join-room', ROOM_ID, id)
   console.log('Open Event Triggered')
 })
+
+// Utils
 
 function connectToNewUser(userId, stream) {
   console.log('Connect to New User')
