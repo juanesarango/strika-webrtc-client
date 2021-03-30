@@ -12,8 +12,9 @@ peerjs --port 9000 --key peerjs --path /myapp
 
 const socket = io('/')
 const myPeer = new Peer(undefined, {
-  host: '/',
-  port: 9000,
+  host: 'vast-sands-06033.herokuapp.com/',
+  port: 443,
+  secure: true,
 })
 
 // Setup video grid

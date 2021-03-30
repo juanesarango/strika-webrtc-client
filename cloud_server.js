@@ -11,9 +11,7 @@ const server = app.listen(PORT, () => {
 })
 
 const peerServer = ExpressPeerServer(server, {
-  secure: true,
-  host: 'your-app-name.herokuapp.com',
-  port: PORT,
+  path: '/',
 })
 
 app.use('/', peerServer)
