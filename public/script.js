@@ -1,43 +1,66 @@
+/*
+To run, open 2 terminals:
+
+In the first, run:
+npm run devStart
+
+In the Second terminal, run: from https://github.com/peers/peerjs-server
+peerjs --port 9000 --key peerjs --path /myapp
+*/
+
+// Setup PeerJs connection
+
 const socket = io('/')
-const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
   host: '/',
-  port: '3001'
+  port: 9000,
 })
+
+// Setup video grid
+const videoGrid = document.getElementById('video-grid')
 const myVideo = document.createElement('video')
 myVideo.muted = true
-const peers = {}
-navigator.mediaDevices.getUserMedia({
-  video: true,
-  audio: true
-}).then(stream => {
-  addVideoStream(myVideo, stream)
 
-  myPeer.on('call', call => {
-    call.answer(stream)
-    const video = document.createElement('video')
-    call.on('stream', userVideoStream => {
-      addVideoStream(video, userVideoStream)
+const peers = {}
+
+navigator.mediaDevices
+  .getUserMedia({
+    video: true,
+    audio: true,
+  })
+  .then((stream) => {
+    addVideoStream(myVideo, stream)
+
+    myPeer.on('call', (call) => {
+      console.log('Call Event Triggered')
+      call.answer(stream)
+      const video = document.createElement('video')
+      call.on('stream', (userVideoStream) => {
+        addVideoStream(video, userVideoStream)
+      })
+    })
+
+    socket.on('user-connected', (userId) => {
+      connectToNewUser(userId, stream)
+      console.log('New user connected: ' + userId)
     })
   })
 
-  socket.on('user-connected', userId => {
-    connectToNewUser(userId, stream)
-  })
-})
-
-socket.on('user-disconnected', userId => {
+socket.on('user-disconnected', (userId) => {
   if (peers[userId]) peers[userId].close()
 })
 
-myPeer.on('open', id => {
+myPeer.on('open', (id) => {
   socket.emit('join-room', ROOM_ID, id)
+  console.log('Open Event Triggered')
 })
 
 function connectToNewUser(userId, stream) {
+  console.log('Connect to New User')
   const call = myPeer.call(userId, stream)
   const video = document.createElement('video')
-  call.on('stream', userVideoStream => {
+  call.on('stream', (userVideoStream) => {
+    console.log('Add Video Stream')
     addVideoStream(video, userVideoStream)
   })
   call.on('close', () => {
@@ -45,6 +68,7 @@ function connectToNewUser(userId, stream) {
   })
 
   peers[userId] = call
+  console.log(peers)
 }
 
 function addVideoStream(video, stream) {
