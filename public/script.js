@@ -49,8 +49,11 @@ navigator.mediaDevices
     })
 
     socket.on('user-connected', (userId) => {
-      connectToNewUser(userId, stream)
-      console.log('New user connected: ' + userId)
+      setTimeout(() => {
+        // user is joining
+        connectToNewUser(userId, stream)
+        console.log('New user connected: ' + userId)
+      }, 3000)
     })
   })
 
