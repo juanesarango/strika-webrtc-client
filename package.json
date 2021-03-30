@@ -6,7 +6,7 @@
   "scripts": {
     "devServer": "nodemon server.js",
     "devSignal": "nodemon signalling.js",
-    "start": "node signalling.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
