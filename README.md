@@ -9,12 +9,12 @@ A PeerJS WebRTC Client Side Code. 📹 🧘🏼‍♂️
 
 Install dependencies:
 ```bash
-yarn start
+yarn install
 ```
 
 ## Running it
 
-To work you need 2 running services: 
+To work you need 2 running services:
 1. Run a WebRTC signalling server to help establish the Peer-to-peer connection (using peerjs).
 
 ```bash
@@ -23,15 +23,17 @@ yarn devSignal
 2. Run the node express application to create web rooms on the browser.
 
 ```bash
-yarn devStart
+yarn devServer
 ```
+
+3. Open http://localhost:3000, get a room id, and share the new url with someone else or open in a new tab.
 
 
 ## Deployment in the cloud.
 
-This example is deployed in the cloud with both services running in heroku. Give it a try 🦾: 
+This example is deployed in the cloud with both services running in heroku. Give it a try 🦾:
 
-https://juanes.herokuapp.com/ 
+https://juanes.herokuapp.com/
 
 Open several tabs with same url, or in your android mobile or share it with a friend!
 
