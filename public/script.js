@@ -135,12 +135,20 @@ function recordStream(stream) {
     const vidContainer = document.createElement('article')
     const vidLabel = document.createElement('p')
     const video = document.createElement('video')
+
     const deleteButton = document.createElement('button')
+    const deleteButtonIcon = document.createElement('i')
+
+    vidLabel.innerHTML = vidName
+    vidLabel.classList.add('ui', 'header')
+
+    deleteButton.innerHTML = 'Delete'
+    deleteButton.classList.add('ui', 'labeled', 'icon', 'button')
+    deleteButtonIcon.classList.add('trash', 'icon')
+    deleteButton.appendChild(deleteButtonIcon)
 
     vidContainer.classList.add('vid')
     video.setAttribute('controls', '')
-    deleteButton.innerHTML = 'Delete'
-    vidLabel.innerHTML = vidName
 
     vidContainer.appendChild(video)
     vidContainer.appendChild(vidLabel)
@@ -149,11 +157,10 @@ function recordStream(stream) {
 
     const blob = new Blob(chunks, { type: 'video/webm; codecs="opus,vp8"' })
     chunks = []
-    // window.chunks = chuncks
     const videoUrl = window.URL.createObjectURL(blob)
     video.src = videoUrl
 
-    uploadToS3(blob)
+    // uploadToS3(blob)
 
     deleteButton.onclick = function (e) {
       let evtTgt = e.target
